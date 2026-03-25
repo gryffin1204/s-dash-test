@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+backend/venv/
+backend/.env
+
+# Node / Vite
+loan-dashboard/node_modules/
+loan-dashboard/dist/
+loan-dashboard/dist-ssr/
+*.log
+
+# Local datasets
+sample_orig_2020.txt
+sample_svcg_2020.txt
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
