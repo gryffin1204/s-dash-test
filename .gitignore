@@ -4,6 +4,7 @@ __pycache__/
 .pytest_cache/
 backend/venv/
 backend/.env
+.env.example
 
 # Node / Vite
 loan-dashboard/node_modules/

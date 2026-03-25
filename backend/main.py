@@ -338,14 +338,16 @@ def infer_chart_plan(df: pd.DataFrame, prompt: str, query_plan: dict[str, object
         y_fields = [column for column in numeric_columns if column != x_field][:3]
 
     chart_type = str(plan.get("chart_type", "")).lower()
+    time_tokens = ("date", "period", "month", "quarter", "year")
     if chart_type not in {"metric", "bar", "line", "table"}:
         if len(df.index) == 1 and numeric_columns:
             chart_type = "metric"
         elif x_field and y_fields:
-            time_tokens = ("date", "period", "month", "quarter", "year")
             chart_type = "line" if any(token in x_field.lower() for token in time_tokens) else "bar"
         else:
             chart_type = "table"
+    elif chart_type == "metric" and len(df.index) > 1 and x_field and y_fields:
+        chart_type = "line" if any(token in x_field.lower() for token in time_tokens) else "bar"
 
     if chart_type == "metric" and not y_fields and numeric_columns:
         y_fields = numeric_columns[:3]
